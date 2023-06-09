@@ -1,0 +1,350 @@
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+Exploratory Data Analysis
+df=pd.read_csv('grades.csv')
+df
+exam	student_id	grade
+0	1	1	86.0
+1	1	2	65.0
+2	1	3	70.0
+3	1	4	98.0
+4	1	5	89.0
+5	1	6	NaN
+6	1	7	75.0
+7	1	8	56.0
+8	1	9	90.0
+9	1	10	81.0
+10	2	1	79.0
+11	2	2	60.0
+12	2	3	78.0
+13	2	4	75.0
+14	2	5	NaN
+15	2	6	80.0
+16	2	7	87.0
+17	2	8	82.0
+18	2	9	95.0
+19	2	10	96.0
+20	3	1	78.0
+21	3	2	80.0
+22	3	3	87.0
+23	3	4	NaN
+24	3	5	89.0
+25	3	6	90.0
+26	3	7	100.0
+27	3	8	72.0
+28	3	9	73.0
+29	3	10	75.0
+30	4	1	NaN
+31	4	2	80.0
+32	4	3	81.0
+33	4	4	82.0
+34	4	5	83.0
+35	4	6	84.0
+36	4	7	85.0
+37	4	8	86.0
+38	4	9	87.0
+39	4	10	88.0
+40	5	1	90.0
+41	5	2	NaN
+42	5	3	91.0
+43	5	4	92.0
+44	5	5	93.0
+45	5	6	94.0
+46	5	7	95.0
+47	5	8	96.0
+48	5	9	97.0
+49	5	10	98.0
+df = df.reindex(np.random.permutation(df.index))
+df.head
+<bound method NDFrame.head of     exam  student_id  grade
+19     2          10   96.0
+22     3           3   87.0
+30     4           1    NaN
+23     3           4    NaN
+12     2           3   78.0
+33     4           4   82.0
+16     2           7   87.0
+34     4           5   83.0
+0      1           1   86.0
+47     5           8   96.0
+18     2           9   95.0
+5      1           6    NaN
+41     5           2    NaN
+10     2           1   79.0
+6      1           7   75.0
+26     3           7  100.0
+45     5           6   94.0
+24     3           5   89.0
+2      1           3   70.0
+7      1           8   56.0
+38     4           9   87.0
+15     2           6   80.0
+13     2           4   75.0
+44     5           5   93.0
+21     3           2   80.0
+39     4          10   88.0
+27     3           8   72.0
+28     3           9   73.0
+37     4           8   86.0
+29     3          10   75.0
+48     5           9   97.0
+11     2           2   60.0
+40     5           1   90.0
+35     4           6   84.0
+32     4           3   81.0
+9      1          10   81.0
+8      1           9   90.0
+31     4           2   80.0
+14     2           5    NaN
+25     3           6   90.0
+49     5          10   98.0
+4      1           5   89.0
+3      1           4   98.0
+20     3           1   78.0
+17     2           8   82.0
+42     5           3   91.0
+1      1           2   65.0
+36     4           7   85.0
+43     5           4   92.0
+46     5           7   95.0>
+df.tail
+<bound method NDFrame.tail of     exam  student_id  grade
+19     2          10   96.0
+22     3           3   87.0
+30     4           1    NaN
+23     3           4    NaN
+12     2           3   78.0
+33     4           4   82.0
+16     2           7   87.0
+34     4           5   83.0
+0      1           1   86.0
+47     5           8   96.0
+18     2           9   95.0
+5      1           6    NaN
+41     5           2    NaN
+10     2           1   79.0
+6      1           7   75.0
+26     3           7  100.0
+45     5           6   94.0
+24     3           5   89.0
+2      1           3   70.0
+7      1           8   56.0
+38     4           9   87.0
+15     2           6   80.0
+13     2           4   75.0
+44     5           5   93.0
+21     3           2   80.0
+39     4          10   88.0
+27     3           8   72.0
+28     3           9   73.0
+37     4           8   86.0
+29     3          10   75.0
+48     5           9   97.0
+11     2           2   60.0
+40     5           1   90.0
+35     4           6   84.0
+32     4           3   81.0
+9      1          10   81.0
+8      1           9   90.0
+31     4           2   80.0
+14     2           5    NaN
+25     3           6   90.0
+49     5          10   98.0
+4      1           5   89.0
+3      1           4   98.0
+20     3           1   78.0
+17     2           8   82.0
+42     5           3   91.0
+1      1           2   65.0
+36     4           7   85.0
+43     5           4   92.0
+46     5           7   95.0>
+df.dtypes
+exam            int64
+student_id      int64
+grade         float64
+dtype: object
+df.shape
+(50, 3)
+df.info()
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 50 entries, 19 to 46
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   exam        50 non-null     int64  
+ 1   student_id  50 non-null     int64  
+ 2   grade       45 non-null     float64
+dtypes: float64(1), int64(2)
+memory usage: 1.6 KB
+df.describe()
+exam	student_id	grade
+count	50.000000	50.000000	45.000000
+mean	3.000000	5.500000	84.177778
+std	1.428571	2.901442	10.052790
+min	1.000000	1.000000	56.000000
+25%	2.000000	3.000000	79.000000
+50%	3.000000	5.500000	86.000000
+75%	4.000000	8.000000	91.000000
+max	5.000000	10.000000	100.000000
+df.size
+150
+Check for missing Values
+
+df.isnull().sum()
+exam          0
+student_id    0
+grade         5
+dtype: int64
+Visualising the missing values
+
+import seaborn as sns
+sns.heatmap(df.isnull(),cbar=False,cmap='viridis')
+<matplotlib.axes._subplots.AxesSubplot at 0x7f20efe50c90>
+
+Replacing the missing values
+
+df['grade'].fillna(df['grade'].mean(), inplace=True)
+df.isnull().sum()
+exam          0
+student_id    0
+grade         0
+dtype: int64
+df
+exam	student_id	grade
+19	2	10	96.000000
+22	3	3	87.000000
+30	4	1	84.177778
+23	3	4	84.177778
+12	2	3	78.000000
+33	4	4	82.000000
+16	2	7	87.000000
+34	4	5	83.000000
+0	1	1	86.000000
+47	5	8	96.000000
+18	2	9	95.000000
+5	1	6	84.177778
+41	5	2	84.177778
+10	2	1	79.000000
+6	1	7	75.000000
+26	3	7	100.000000
+45	5	6	94.000000
+24	3	5	89.000000
+2	1	3	70.000000
+7	1	8	56.000000
+38	4	9	87.000000
+15	2	6	80.000000
+13	2	4	75.000000
+44	5	5	93.000000
+21	3	2	80.000000
+39	4	10	88.000000
+27	3	8	72.000000
+28	3	9	73.000000
+37	4	8	86.000000
+29	3	10	75.000000
+48	5	9	97.000000
+11	2	2	60.000000
+40	5	1	90.000000
+35	4	6	84.000000
+32	4	3	81.000000
+9	1	10	81.000000
+8	1	9	90.000000
+31	4	2	80.000000
+14	2	5	84.177778
+25	3	6	90.000000
+49	5	10	98.000000
+4	1	5	89.000000
+3	1	4	98.000000
+20	3	1	78.000000
+17	2	8	82.000000
+42	5	3	91.000000
+1	1	2	65.000000
+36	4	7	85.000000
+43	5	4	92.000000
+46	5	7	95.000000
+df.boxplot(column='grade')
+<matplotlib.axes._subplots.AxesSubplot at 0x7f20ece5ec90>
+
+Random Forest Classifier
+from sklearn.ensemble import RandomForestClassifier
+x=df['student_id'].values
+y=df['grade'].values
+import sklearn
+from sklearn.model_selection import train_test_split 
+ 
+X=x.reshape(-1, 1)
+Y=y.reshape(-1,1)
+from sklearn import preprocessing
+from sklearn import utils
+
+lab = preprocessing.LabelEncoder()
+y_transformed = lab.fit_transform(Y)
+/usr/local/lib/python3.7/dist-packages/sklearn/preprocessing/_label.py:115: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+x_train, x_test, y_train, y_test = train_test_split(
+    X, y_transformed, test_size=0.1, random_state=12)
+from sklearn.metrics import recall_score  # since the dataset is small, this is to enlarge the dataset
+from imblearn.over_sampling import SMOTE
+smote=SMOTE("minority")
+x_train,y_train=smote.fit_resample(x_test,y_test)
+/usr/local/lib/python3.7/dist-packages/imblearn/utils/_validation.py:591: FutureWarning: Pass sampling_strategy=minority as keyword args. From version 0.9 passing these as positional arguments will result in an error
+  FutureWarning,
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+x_train = sc.fit_transform(x_train)
+x_test = sc.transform(x_test)
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+Random Forest Classifier
+
+rfc=RandomForestClassifier(n_estimators=100, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='sqrt', max_leaf_nodes=None, min_impurity_decrease=0.0, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+rfc.fit(x_train,y_train)
+RandomForestClassifier(max_features='sqrt')
+y_pred=rfc.predict(x_test)
+print(accuracy_score(y_test,y_pred)*100)
+80.0
+Random Forest Regressor
+
+from sklearn.ensemble import RandomForestRegressor
+reg_rf = RandomForestRegressor(n_estimators = 10 ,random_state = 0)
+reg_rf.fit(x_train, y_train)
+y_pred = reg_rf.predict(x_test)
+y_pred
+array([17.05      ,  6.75      , 15.61666667, 15.61666667, 19.05      ])
+reg_rf.score(x_train, y_train)*100
+76.92917188805347
+reg_rf.score(x_test, y_test)*100
+76.92917188805347
+SVM
+
+from sklearn import svm
+model1 = svm.SVC(kernel='rbf', random_state=100, gamma = "scale", decision_function_shape="ovr", max_iter=15000)
+model1.fit(x_train, y_train)
+SVC(max_iter=15000, random_state=100)
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+y_pred= model1.predict(x_test)
+print("\nSVM Accuracy is ", accuracy_score(y_test,y_pred)*100,"\n\nClassification report is\n",classification_report(y_test,y_pred))
+SVM Accuracy is  80.0 
+
+Classification report is
+               precision    recall  f1-score   support
+
+           2       1.00      1.00      1.00         1
+          12       0.00      0.00      0.00         1
+          16       1.00      1.00      1.00         1
+          19       0.50      1.00      0.67         1
+          20       1.00      1.00      1.00         1
+
+    accuracy                           0.80         5
+   macro avg       0.70      0.80      0.73         5
+weighted avg       0.70      0.80      0.73         5
+
+/usr/local/lib/python3.7/dist-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/usr/local/lib/python3.7/dist-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/usr/local/lib/python3.7/dist-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
